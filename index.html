@@ -3,32 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的题解网站</title>
+    <title>541</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
         }
+
         .solution-list {
             list-style: none;
             padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* 自动适应 */
+            gap: 20px;
         }
+        
         .solution-item {
-            margin-bottom: 15px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+        
         .solution-item a {
             text-decoration: none;
             color: #0366d6;
             font-size: 18px;
         }
+        
         .solution-item a:hover {
             text-decoration: underline;
+        }
+        
+        /* 小屏幕时变为单列 */
+        @media (max-width: 768px) {
+            .solution-list {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                max-width: 100%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
