@@ -7,21 +7,22 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+            max-width: 1200px;  /* 增加最大宽度以适应两列 */
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
         }
-
+        
         .solution-list {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* 自动适应 */
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);  /* 两列布局 */
+            gap: 20px;  /* 卡片之间的间距 */
         }
         
         .solution-item {
+            margin-bottom: 0;  /* 移除原来的下边距，因为gap已经处理了间距 */
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -35,18 +36,6 @@
         
         .solution-item a:hover {
             text-decoration: underline;
-        }
-        
-        /* 小屏幕时变为单列 */
-        @media (max-width: 768px) {
-            .solution-list {
-                grid-template-columns: 1fr;
-            }
-            
-            body {
-                max-width: 100%;
-                padding: 10px;
-            }
         }
     </style>
 </head>
