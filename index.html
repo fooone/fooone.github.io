@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的题解网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .solution-list {
+            list-style: none;
+            padding: 0;
+        }
+        .solution-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .solution-item a {
+            text-decoration: none;
+            color: #0366d6;
+            font-size: 18px;
+        }
+        .solution-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>我的题解集</h1>
+    <div id="solution-list">
+        <p>正在加载题解...</p>
+    </div>
+
+    <script>
+        // GitHub仓库信息 - 修改为你的信息
+        const username = '你的GitHub用户名';
+        const repo = '你的仓库名';
+        const solutionsFolder = 'solutions'; // 题解文件夹名
+        
+        async function loadSolutions() {
+            try {
+                // 获取题解文件夹内容
+                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${solutionsFolder}`);
+                const files = await response.json();
+                
+                const solutionList = document.getElementById('solution-list');
+                let html = '<ul class="solution-list">';
+                
+                files.forEach(file => {
+                    if (file.name.endsWith('.md') || file.name.endsWith('.txt')) {
+                        const fileName = file.name.replace('.md', '').replace('.txt', '');
+                        html += `
+                            <li class="solution-item">
+                                <a href="${file.download_url}" target="_blank">
+                                    ${fileName}
+                                </a>
+                            </li>
+                        `;
+                    }
+                });
+                
+                html += '</ul>';
+                solutionList.innerHTML = html;
+                
+            } catch (error) {
+                console.error('加载题解失败:', error);
+                document.getElementById('solution-list').innerHTML = '<p>加载题解失败，请稍后重试。</p>';
+            }
+        }
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', loadSolutions);
+    </script>
+</body>
+</html>
